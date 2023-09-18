@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +28,15 @@ SECRET_KEY = 'django-insecure-cm!8e(ohs+aqt=t14z&*-8*xvo-pfxod28tjt8+5lplc_5bewh
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [
+#     "heylon.ru",
+#     "www.heylon.ru",
+#     "test.heylon.ru",
+#     "193.164.17.141",
+#     "127.0.0.1",
+#     "localhost",
+#     "192.168.18.6",
+# ]
 
 
 # Application definition
@@ -37,6 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'api',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +90,12 @@ WSGI_APPLICATION = 'djangonextjs.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'heylon_next',
+        'USER': 'heylon',
+        'PASSWORD': 'OYrmfyg4DAVY',
+        'HOST': '80.76.43.84',
+        'PORT': '3306',
     }
 }
 
@@ -103,9 +122,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -115,7 +134,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/static/'
+# STATIC_URL = 'https://static.heylon.ru/static/'
+# https://static.heylon.ru
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+# MEDIA_URL = 'https://static.heylon.ru/media/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+]
+
+SITE_ID = 1
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
